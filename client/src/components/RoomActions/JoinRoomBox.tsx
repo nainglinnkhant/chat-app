@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { JOIN_ROOM, ROOM_NOT_FOUND } from '../../constants'
 import { socket } from '../../socket'
 import styles from './RoomActions.module.css'
@@ -6,8 +6,10 @@ import styles from './RoomActions.module.css'
 const JoinRoomBox = () => {
   const [roomName, setRoomName] = useState<string>('')
 
-  const joinRoom = () => {
+  const joinRoom = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     socket.emit(JOIN_ROOM, { roomName })
+    setRoomName('')
   }
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const JoinRoomBox = () => {
   }, [])
 
   return (
-    <div className={styles['action-container']}>
+    <form className={styles['action-container']} onSubmit={joinRoom}>
       <input
         value={roomName}
         onChange={e => setRoomName(e.target.value)}
@@ -26,10 +28,10 @@ const JoinRoomBox = () => {
         placeholder='Room Name'
       />
 
-      <button className={styles['action-btn']} onClick={joinRoom}>
+      <button type='submit' className={styles['action-btn']}>
         Join a Room
       </button>
-    </div>
+    </form>
   )
 }
 

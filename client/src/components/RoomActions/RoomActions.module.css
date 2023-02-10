@@ -15,17 +15,21 @@
     display: flex;
     flex-direction: column;
     margin: 0 20px;
-    padding: 20px;
+    padding: 30px 20px;
 }
 
 .action-input {
     width: 100%;
     height: 40px;
     border-radius: 5px;
-    border: 1px solid #6096B4;
+    border: 1px solid #93BFCF;
     outline: 0;
     margin-bottom: 20px;
     padding: 10px;
+}
+
+.action-input::placeholder {
+    color: #AAAAAA;
 }
 
 .action-btn {
