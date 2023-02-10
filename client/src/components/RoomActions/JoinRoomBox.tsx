@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { JOIN_ROOM, ROOM_NOT_FOUND } from '../constants'
-import { socket } from '../socket'
+import { JOIN_ROOM, ROOM_NOT_FOUND } from '../../constants'
+import { socket } from '../../socket'
 import styles from './RoomActions.module.css'
 
 const JoinRoomBox = () => {

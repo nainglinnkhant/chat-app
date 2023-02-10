@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { CREATE_ROOM } from '../constants'
-import { socket } from '../socket'
+import { CREATE_ROOM } from '../../constants'
+import { socket } from '../../socket'
 import styles from './RoomActions.module.css'
 
 const CreateRoomBox = () => {
