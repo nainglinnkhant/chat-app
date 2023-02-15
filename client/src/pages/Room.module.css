@@ -1,0 +1,96 @@
+.room-header {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+  z-index: 10;
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.header-left h1 {
+  font-size: 1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header-right button {
+  background: transparent;
+  border: 1px solid #e5534b;
+  color: #e5534b;
+  padding: 5px 15px;
+  font-size: 0.8rem;
+  border-radius: 3px;
+}
+
+.room-left {
+  width: 20%;
+  background: #282b30;
+  padding: 15px 20px;
+  height: 100%;
+}
+
+.room-right {
+  width: 80%;
+  background: #36393e;
+  padding: 15px 20px;
+  height: 100%;
+}
+
+.room-main {
+  display: flex;
+  height: calc(100vh - 3rem);
+  color: #fff;
+}
+
+.members-section h2 {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.members-section p {
+  margin-bottom: 0.7rem;
+  font-size: 0.9rem;
+}
+
+.message-container {
+  height: calc(100vh - 3rem - 90px);
+  overflow-y: scroll;
+}
+
+.message-form {
+  background: #424549;
+  height: 50px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+}
+
+.message-form input {
+  background: transparent;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border: 0;
+  outline: 0;
+}
+
+.message-form button {
+  background: transparent;
+  color: #fff;
+  border: 0;
+  margin-right: 20px;
+}
