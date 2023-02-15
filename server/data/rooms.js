@@ -7,10 +7,10 @@ const addUser = (roomName, user) => {
   rooms[roomName].push(user)
 }
 
-const removeUser = (roomName, user) => {
+const removeUser = (roomName, userId) => {
   if (!rooms[roomName]) return
   
-  const filteredUsers = rooms[roomName].filter(roomUser => roomUser.id !== user.id)
+  const filteredUsers = rooms[roomName].filter(roomUser => roomUser.id !== userId)
 
   if (filteredUsers.length === 0) return delete rooms[roomName]
 

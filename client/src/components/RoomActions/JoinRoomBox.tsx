@@ -32,7 +32,7 @@ const JoinRoomBox = () => {
     })
 
     socket.on(ROOM_JOINED, ({ members, roomName, user }) => {
-      localStorage.setItem(CHAT_USER, JSON.stringify(user))
+      localStorage.setItem(CHAT_USER, user.id)
       navigate(`/room/${roomName}`, { state: { members, roomName } })
     })
   }, [navigate])

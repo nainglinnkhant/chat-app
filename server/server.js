@@ -47,9 +47,9 @@ io.on('connection', socket => {
     }
   })
 
-  socket.on(LEAVE_ROOM, ({ roomName, user }) => {
+  socket.on(LEAVE_ROOM, ({ roomName, userId }) => {
     socket.leave(roomName)
-    removeUser(roomName, user)
+    removeUser(roomName, userId)
     io.emit(UPDATE_MEMBERS, { members: getRoomMembers(roomName) })
   })
 })

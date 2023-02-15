@@ -12,8 +12,8 @@ const RoomHeader = ({ roomName }: RoomHeaderProps) => {
   const navigate = useNavigate()
 
   const leaveRoom = () => {
-    const user = localStorage.getItem(CHAT_USER) || ''
-    socket.emit(LEAVE_ROOM, { roomName, user: JSON.parse(user) })
+    const userId = localStorage.getItem(CHAT_USER) || ''
+    socket.emit(LEAVE_ROOM, { roomName, userId })
     localStorage.removeItem(CHAT_USER)
     navigate(-1)
   }
