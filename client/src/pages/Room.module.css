@@ -27,8 +27,8 @@
 
 .header-right button {
   background: transparent;
-  border: 1px solid #e5534b;
-  color: #e5534b;
+  border: 1px solid var(--warning);
+  color: var(--warning);
   padding: 5px 15px;
   font-size: 0.8rem;
   border-radius: 3px;
@@ -36,14 +36,14 @@
 
 .room-left {
   width: 20%;
-  background: #282b30;
+  background: var(--dark-black);
   padding: 15px 20px;
   height: 100%;
 }
 
 .room-right {
   width: 80%;
-  background: #36393e;
+  background: var(--medium-black);
   padding: 15px 20px;
   height: 100%;
 }
@@ -71,7 +71,7 @@
 }
 
 .message-form {
-  background: #424549;
+  background: var(--light-black);
   height: 50px;
   width: 100%;
   border-radius: 10px;
@@ -86,6 +86,10 @@
   padding: 20px;
   border: 0;
   outline: 0;
+}
+
+.message-form input::placeholder {
+  color: var(--light-grey);
 }
 
 .message-form button {

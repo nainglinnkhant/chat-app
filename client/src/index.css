@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  --light-black: #424549;
+  --medium-black: #36393e;
+  --dark-black: #282b30;
+  --light-blue: #7289da;
+  --warning: #e5534b;
+  --light-grey: #979595;
+}
+
 html, body {
   font-family: Arial, Helvetica, sans-serif;
   background: #36393e;

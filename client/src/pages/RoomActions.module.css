@@ -22,7 +22,7 @@
 
 .action-container p {
     font-size: 0.8rem;
-    color: #e5534b;
+    color: var(--warning);
     margin-bottom: 1.3rem;
 }
 
@@ -34,17 +34,17 @@
     outline: 0;
     margin-bottom: 1.3rem;
     padding: 15px;
-    background: #424549;
+    background: var(--light-black);
     color: #fff;
 }
 
 .action-input::placeholder {
-    color: #AAAAAA;
+    color: var(--light-grey);
 }
 
 .action-btn {
     padding: 8px 12px;
-    background: #7289da;
+    background: var(--light-blue);
     color: #fff;
     border: 0;
     border-radius: 5px;
