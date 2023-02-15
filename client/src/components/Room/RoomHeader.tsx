@@ -15,7 +15,7 @@ const RoomHeader = ({ roomName }: RoomHeaderProps) => {
     const userId = localStorage.getItem(CHAT_USER) || ''
     socket.emit(LEAVE_ROOM, { roomName, userId })
     localStorage.removeItem(CHAT_USER)
-    navigate(-1)
+    navigate('/', { replace: true })
   }
 
   return (
