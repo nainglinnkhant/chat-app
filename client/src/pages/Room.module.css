@@ -65,6 +65,10 @@
   font-size: 0.9rem;
 }
 
+.active-member {
+  color: var(--light-blue);
+}
+
 .message-container {
   height: calc(100vh - 3rem - 90px);
   overflow-y: scroll;
