@@ -3,7 +3,7 @@ const http = require('http')
 const { Server } = require('socket.io')
 const cors = require('cors')
 const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS } = require('./constants')
-const { addUser, getRoomMembers, removeUser } = require('./data/rooms')
+const { addUser, getRoomMembers, removeUser } = require('./data/users')
 
 const app = express()
 
@@ -15,7 +15,15 @@ const io = new Server(server)
 
 const PORT = 3001
 
-const emitRoomJoin = (socket, roomName, user) => {
+const joinRoom = (socket, roomName, userName) => {
+  socket.join(roomName)
+  const user = {
+    id: socket.id,
+    name: userName,
+    roomName,
+  }
+  addUser(user)
+
   const members = getRoomMembers(roomName)
   socket.emit(ROOM_JOINED, { members, roomName, user })
   io.to(roomName).emit(UPDATE_MEMBERS, { members })
@@ -27,21 +35,17 @@ const isRoomCreated = (roomName) => {
 }
 
 io.on('connection', socket => {
-  socket.on(CREATE_ROOM, ({ roomName, user }) => {
+  socket.on(CREATE_ROOM, ({ roomName, userName }) => {
     if (isRoomCreated(roomName)) {
       socket.emit(ROOM_CREATE_FAIL, { message: 'This room is already created.' })
     } else {
-      socket.join(roomName)
-      addUser(roomName, user)
-      emitRoomJoin(socket, roomName, user)
+      joinRoom(socket, roomName, userName)
     }
   })
 
-  socket.on(JOIN_ROOM, ({ roomName, user }) => {
+  socket.on(JOIN_ROOM, ({ roomName, userName }) => {
     if (isRoomCreated(roomName)) {
-      socket.join(roomName)
-      addUser(roomName, user)
-      emitRoomJoin(socket, roomName, user)
+      joinRoom(socket, roomName, userName)
     } else {
       socket.emit(ROOM_NOT_FOUND, { message: 'The room you have entered in not created yet!' })
     }
@@ -49,7 +53,7 @@ io.on('connection', socket => {
 
   socket.on(LEAVE_ROOM, ({ roomName, userId }) => {
     socket.leave(roomName)
-    removeUser(roomName, userId)
+    removeUser(userId)
     io.to(roomName).emit(UPDATE_MEMBERS, { members: getRoomMembers(roomName) })
   })
 })

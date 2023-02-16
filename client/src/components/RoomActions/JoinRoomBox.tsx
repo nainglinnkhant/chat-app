@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import uuid from 'react-uuid'
 
 import { CHAT_USER, JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants'
 import { socket } from '../../socket'
@@ -19,11 +18,7 @@ const JoinRoomBox = () => {
 
     if (!roomName.trim() || !userName.trim()) return setError('You need to fill in all fields.')
 
-    const user = {
-      id: uuid(),
-      name: userName,
-    }
-    socket.emit(JOIN_ROOM, { roomName, user })
+    socket.emit(JOIN_ROOM, { roomName, userName })
   }
 
   useEffect(() => {

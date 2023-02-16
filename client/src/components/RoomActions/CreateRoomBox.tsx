@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from 'react'
-import uuid from 'react-uuid'
 
 import { CREATE_ROOM, ROOM_CREATE_FAIL } from '../../constants'
 import { socket } from '../../socket'
@@ -16,11 +15,7 @@ const CreateRoomBox = () => {
 
     if (!roomName.trim() || !userName.trim()) return setError('You need to fill in all fields.')
 
-    const user = {
-      id: uuid(),
-      name: userName,
-    }
-    socket.emit(CREATE_ROOM, { roomName, user })
+    socket.emit(CREATE_ROOM, { roomName, userName })
   }
 
   useEffect(() => {
