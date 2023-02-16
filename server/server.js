@@ -18,7 +18,7 @@ const PORT = 3001
 const emitRoomJoin = (socket, roomName, user) => {
   const members = getRoomMembers(roomName)
   socket.emit(ROOM_JOINED, { members, roomName, user })
-  io.emit(UPDATE_MEMBERS, { members })
+  io.to(roomName).emit(UPDATE_MEMBERS, { members })
 }
 
 const isRoomCreated = (roomName) => {
@@ -50,7 +50,7 @@ io.on('connection', socket => {
   socket.on(LEAVE_ROOM, ({ roomName, userId }) => {
     socket.leave(roomName)
     removeUser(roomName, userId)
-    io.emit(UPDATE_MEMBERS, { members: getRoomMembers(roomName) })
+    io.to(roomName).emit(UPDATE_MEMBERS, { members: getRoomMembers(roomName) })
   })
 })
 
