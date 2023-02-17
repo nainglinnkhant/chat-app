@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { CHAT_USER, UPDATE_MEMBERS } from '../../constants'
+import { UPDATE_MEMBERS } from '../../constants'
 import { socket } from '../../socket'
 import styles from '../../pages/Room.module.css'
 
@@ -11,11 +11,11 @@ interface Member {
 
 interface MembersProps {
   members: Member[]
+  userId: string
 }
 
-const Members = ({ members }: MembersProps) => {
+const Members = ({ members, userId }: MembersProps) => {
   const [chatMembers, setChatMembers] = useState(members || [])
-  const userId = localStorage.getItem(CHAT_USER)
 
   useEffect(() => {
     socket.on(UPDATE_MEMBERS, ({ members }) => {

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { CHAT_USER, LEAVE_ROOM } from '../../constants'
+import { LEAVE_ROOM } from '../../constants'
 import { socket } from '../../socket'
 import styles from '../../pages/Room.module.css'
 
@@ -12,9 +12,7 @@ const RoomHeader = ({ roomName }: RoomHeaderProps) => {
   const navigate = useNavigate()
 
   const leaveRoom = () => {
-    const userId = localStorage.getItem(CHAT_USER) || ''
-    socket.emit(LEAVE_ROOM, { roomName, userId })
-    localStorage.removeItem(CHAT_USER)
+    socket.emit(LEAVE_ROOM, { roomName })
     navigate('/', { replace: true })
   }
 

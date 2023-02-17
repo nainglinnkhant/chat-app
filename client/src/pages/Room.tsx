@@ -7,7 +7,7 @@ import styles from './Room.module.css'
 
 const Room = () => {
   const { state } = useLocation()
-  const { members, roomName } = state
+  const { members, roomName, userId } = state
   
   return (
     <>
@@ -15,7 +15,7 @@ const Room = () => {
       
       <div className={styles['room-main']}>
         <div className={styles['room-left']}>
-          <Members members={members} />
+          <Members members={members} userId={userId} />
         </div>
 
         <div className={styles['room-right']}>

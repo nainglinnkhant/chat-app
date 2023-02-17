@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { CHAT_USER, JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants'
+import { JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants'
 import { socket } from '../../socket'
 import styles from '../../pages/RoomActions.module.css'
 
@@ -27,8 +27,10 @@ const JoinRoomBox = () => {
     })
 
     socket.on(ROOM_JOINED, ({ members, roomName, user }) => {
-      localStorage.setItem(CHAT_USER, user.id)
-      navigate(`/room/${roomName}`, { state: { members, roomName }, replace: true })
+      navigate(
+        `/room/${roomName}`,
+        { state: { members, roomName, userId: user.id }, replace: true }
+      )
     })
   }, [navigate])
 
