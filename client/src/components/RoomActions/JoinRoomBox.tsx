@@ -26,10 +26,10 @@ const JoinRoomBox = () => {
       alert(message)
     })
 
-    socket.on(ROOM_JOINED, ({ members, roomName, user }) => {
+    socket.on(ROOM_JOINED, ({ members, roomName, user, messages }) => {
       navigate(
         `/room/${roomName}`,
-        { state: { members, roomName, userId: user.id }, replace: true }
+        { state: { members, roomName, userId: user.id, messages }, replace: true }
       )
     })
   }, [navigate])

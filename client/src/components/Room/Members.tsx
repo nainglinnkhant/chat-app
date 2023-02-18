@@ -4,7 +4,7 @@ import { UPDATE_MEMBERS } from '../../constants'
 import { socket } from '../../socket'
 import styles from '../../pages/Room.module.css'
 
-interface Member {
+export interface Member {
   id: string
   name: string
 }

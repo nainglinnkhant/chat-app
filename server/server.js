@@ -2,8 +2,12 @@ const express = require('express')
 const http = require('http')
 const { Server } = require('socket.io')
 const cors = require('cors')
-const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS } = require('./constants')
+const { v4: uuidv4 } = require('uuid')
+
+const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS, SEND_MESSAGE, RECEIVE_MESSAGE } = require('./constants')
 const { addUser, getRoomMembers, removeUser, getUser } = require('./data/users')
+const { addMessage, getRoomMessages, deleteRoom } = require('./data/messages')
+const { formatDate } = require('./utils/date')
 
 const app = express()
 
@@ -25,7 +29,9 @@ const joinRoom = (socket, roomName, userName) => {
   addUser(user)
 
   const members = getRoomMembers(roomName)
-  socket.emit(ROOM_JOINED, { members, roomName, user })
+  const messages = getRoomMessages(roomName) || []
+
+  socket.emit(ROOM_JOINED, { members, roomName, user, messages })
   io.to(roomName).emit(UPDATE_MEMBERS, { members })
 }
 
@@ -33,6 +39,9 @@ const leaveRoom = (socket, roomName) => {
   socket.leave(roomName)
   removeUser(socket.id)
   io.to(roomName).emit(UPDATE_MEMBERS, { members: getRoomMembers(roomName) })
+
+  const members = getRoomMembers(roomName)
+  if (members.length === 0) deleteRoom(roomName)
 }
 
 const isRoomCreated = (roomName) => {
@@ -59,6 +68,19 @@ io.on('connection', socket => {
 
   socket.on(LEAVE_ROOM, ({ roomName }) => {
     leaveRoom(socket, roomName)
+  })
+
+  socket.on(SEND_MESSAGE, ({ roomName, senderId, message }) => {
+    const sender = getUser(senderId)
+    const messageObj = {
+      id: uuidv4(),
+      sender,
+      text: message,
+      createdAt: formatDate(Date.now()),
+    }
+
+    addMessage(messageObj, roomName)
+    io.to(roomName).emit(RECEIVE_MESSAGE, messageObj)
   })
 
   socket.on('disconnect', () => {

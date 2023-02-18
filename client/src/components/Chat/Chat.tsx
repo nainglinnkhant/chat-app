@@ -1,12 +1,18 @@
 import MessageInput from './MessageInput'
-import Messages from './Messages'
+import Messages, { Message } from './Messages'
 
-const Chat = () => {
+interface ChatProps {
+  roomName: string
+  userId: string
+  messages: Message[]
+}
+
+const Chat = ({ roomName, userId, messages }: ChatProps) => {
   return (
     <>
-      <Messages />
+      <Messages messages={messages} />
       
-      <MessageInput />
+      <MessageInput roomName={roomName} userId={userId} />
     </>
   )
 }

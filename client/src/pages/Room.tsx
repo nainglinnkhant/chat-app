@@ -7,7 +7,7 @@ import styles from './Room.module.css'
 
 const Room = () => {
   const { state } = useLocation()
-  const { members, roomName, userId } = state
+  const { members, roomName, userId, messages } = state
   
   return (
     <>
@@ -19,7 +19,7 @@ const Room = () => {
         </div>
 
         <div className={styles['room-right']}>
-          <Chat />
+          <Chat roomName={roomName} userId={userId} messages={messages} />
         </div>
       </div>
     </>

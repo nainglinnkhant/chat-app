@@ -102,3 +102,36 @@
   border: 0;
   margin-right: 20px;
 }
+
+.message-container ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.message-item {
+  background: var(--light-black);
+  border-radius: 5px;
+  padding: 6px 30px 6px 12px;
+  margin-bottom: 1rem;
+}
+
+.message-item h3 span {
+  font-weight: 400;
+}
+
+.message-item h3 span:first-child {
+  font-size: 1rem;
+}
+
+.message-item h3 span:nth-child(2) {
+  font-size: 0.75rem;
+  color: var(--light-grey);
+  margin-left: 8px;
+}
+
+.message-item p {
+  margin-top: 5px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}

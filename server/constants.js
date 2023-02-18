@@ -6,4 +6,6 @@ module.exports = {
   LEAVE_ROOM: 'leave-room',
   ROOM_CREATE_FAIL: 'room-create-fail',
   UPDATE_MEMBERS: 'update-members',
+  SEND_MESSAGE: 'send-message',
+  RECEIVE_MESSAGE: 'receive-message',
 }
