@@ -42,7 +42,7 @@ const joinRoom = (socket, roomName, userName) => {
   addMessage(message, roomName)
 
   socket.emit(ROOM_JOINED, { members, roomName, user, messages })
-  socket.broadcast.to(roomName).emit(RECEIVE_MESSAGE, message)
+  socket.broadcast.to(roomName).emit(RECEIVE_MESSAGE, message) // send join room notification
   io.to(roomName).emit(UPDATE_MEMBERS, { members })
 }
 
@@ -57,7 +57,7 @@ const leaveRoom = (socket, roomName) => {
   }
   addMessage(message, roomName)
 
-  socket.broadcast.to(roomName).emit(RECEIVE_MESSAGE, message)
+  socket.broadcast.to(roomName).emit(RECEIVE_MESSAGE, message) // send leave room notification
 
   socket.leave(roomName)
   removeUser(socket.id)
