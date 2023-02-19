@@ -29,13 +29,35 @@ const joinRoom = (socket, roomName, userName) => {
   addUser(user)
 
   const members = getRoomMembers(roomName)
-  const messages = getRoomMessages(roomName) || []
+  const messages = getRoomMessages(roomName, socket.id) || []
+  
+  const message = {
+    id: uuidv4(),
+    type: 'notification',
+    sender: user,
+    text: `${userName} has joined the room.`,
+    createdAt: formatDate(Date.now()),
+  }
+  addMessage(message, roomName)
 
   socket.emit(ROOM_JOINED, { members, roomName, user, messages })
+  socket.broadcast.to(roomName).emit(RECEIVE_MESSAGE, message)
   io.to(roomName).emit(UPDATE_MEMBERS, { members })
 }
 
 const leaveRoom = (socket, roomName) => {
+  const user = getUser(socket.id)
+  const message = {
+    id: uuidv4(),
+    type: 'notification',
+    sender: user,
+    text: `${user?.name} has left the room.`,
+    createdAt: formatDate(Date.now()),
+  }
+  addMessage(message, roomName)
+
+  socket.broadcast.to(roomName).emit(RECEIVE_MESSAGE, message)
+
   socket.leave(roomName)
   removeUser(socket.id)
   io.to(roomName).emit(UPDATE_MEMBERS, { members: getRoomMembers(roomName) })
@@ -74,6 +96,7 @@ io.on('connection', socket => {
     const sender = getUser(senderId)
     const messageObj = {
       id: uuidv4(),
+      type: 'message',
       sender,
       text: message,
       createdAt: formatDate(Date.now()),

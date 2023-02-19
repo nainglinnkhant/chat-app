@@ -6,16 +6,25 @@ interface MessageItemProps {
 }
 
 const MessageItem = ({ message }: MessageItemProps) => {
-  const { sender, createdAt, text } = message
+  const { sender, createdAt, text, type } = message
 
   return (
     <li className={styles['message-item']}>
-      <h3>
-        <span>{sender?.name}</span>
-        <span>{createdAt}</span>
-      </h3>
+      {type === 'message' ? (
+        <>
+          <h3>
+            <span>{sender?.name}</span>
+            <span>{createdAt}</span>
+          </h3>
 
-      <p>{text}</p>
+          <p>{text}</p>
+        </>
+      ) : (
+        <h3>
+          <span>{text}</span>
+          <span>{createdAt}</span>
+        </h3>
+      )}
     </li>
   )
 }
