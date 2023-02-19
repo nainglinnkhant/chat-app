@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'
 
-import { SEND_MESSAGE } from '../../constants'
+import { SEND_MESSAGE } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import styles from '../../pages/Room.module.css'
 

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { LEAVE_ROOM } from '../../constants'
+import { LEAVE_ROOM } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import styles from '../../pages/Room.module.css'
 

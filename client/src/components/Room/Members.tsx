@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { UPDATE_MEMBERS } from '../../constants'
+import { UPDATE_MEMBERS } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import { Member } from '../../types/types'
 import styles from '../../pages/Room.module.css'

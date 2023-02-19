@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 
-import { CREATE_ROOM, ROOM_CREATE_FAIL } from '../../constants'
+import { CREATE_ROOM, ROOM_CREATE_FAIL } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import styles from '../../pages/RoomActions.module.css'
 

@@ -4,7 +4,7 @@ const { Server } = require('socket.io')
 const cors = require('cors')
 const { v4: uuidv4 } = require('uuid')
 
-const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS, SEND_MESSAGE, RECEIVE_MESSAGE } = require('./constants')
+const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS, SEND_MESSAGE, RECEIVE_MESSAGE } = require('./constants/eventNames')
 const { addUser, getRoomMembers, removeUser, getUser } = require('./data/users')
 const { addMessage, getRoomMessages, deleteRoom } = require('./data/messages')
 const { formatDate } = require('./utils/date')

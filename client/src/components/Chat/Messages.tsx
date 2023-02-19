@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { RECEIVE_MESSAGE } from '../../constants'
+import { RECEIVE_MESSAGE } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import MessageItem from './MessageItem'
 import { Message } from '../../types/types'

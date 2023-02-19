@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants'
+import { JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import { Member, Message } from '../../types/types'
 import styles from '../../pages/RoomActions.module.css'
