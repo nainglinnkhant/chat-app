@@ -2,12 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { UPDATE_MEMBERS } from '../../constants'
 import { socket } from '../../socket'
+import { Member } from '../../types/types'
 import styles from '../../pages/Room.module.css'
-
-export interface Member {
-  id: string
-  name: string
-}
 
 interface MembersProps {
   members: Member[]

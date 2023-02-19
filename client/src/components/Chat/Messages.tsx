@@ -2,16 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 
 import { RECEIVE_MESSAGE } from '../../constants'
 import { socket } from '../../socket'
-import { Member } from '../Room/Members'
 import MessageItem from './MessageItem'
+import { Message } from '../../types/types'
 import styles from '../../pages/Room.module.css'
-
-export interface Message {
-  id: string
-  sender: Member
-  text: string
-  createdAt: string
-}
 
 interface MessagesProps {
   messages: Message[]

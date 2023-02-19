@@ -1,11 +1,11 @@
-import { Message } from './Messages'
+import { Message } from '../../types/types'
 import styles from '../../pages/Room.module.css'
 
-interface MessageProps {
+interface MessageItemProps {
   message: Message
 }
 
-const MessageItem = ({ message }: MessageProps) => {
+const MessageItem = ({ message }: MessageItemProps) => {
   const { sender, createdAt, text } = message
 
   return (

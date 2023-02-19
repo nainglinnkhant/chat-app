@@ -1,5 +1,6 @@
 import MessageInput from './MessageInput'
-import Messages, { Message } from './Messages'
+import Messages from './Messages'
+import { Message } from '../../types/types'
 
 interface ChatProps {
   roomName: string
