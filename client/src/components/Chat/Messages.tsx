@@ -15,9 +15,15 @@ const Messages = ({ messages }: MessagesProps) => {
   const lastItemRef = useRef<HTMLLIElement | null>(null)
 
   useEffect(() => {
-    socket.on(RECEIVE_MESSAGE, (message) => {
+    const updateMessages = (message: Message) => {
       setMessageList(prevMessages => [...prevMessages, message])
-    })
+    }
+
+    socket.on(RECEIVE_MESSAGE, updateMessages)
+
+    return () => {
+      socket.off(RECEIVE_MESSAGE, updateMessages)
+    }
   }, [])
 
   useEffect(() => {

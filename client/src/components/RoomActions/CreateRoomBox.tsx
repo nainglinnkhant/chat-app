@@ -19,9 +19,15 @@ const CreateRoomBox = () => {
   }
 
   useEffect(() => {
-    socket.on(ROOM_CREATE_FAIL, ({ message }) => {
+    const handleRoomCreateFail = ({ message }: { message: string }) => {
       setError(message)
-    })
+    }
+
+    socket.on(ROOM_CREATE_FAIL, handleRoomCreateFail)
+
+    return () => {
+      socket.off(ROOM_CREATE_FAIL, handleRoomCreateFail)
+    }
   }, [])
 
   return (

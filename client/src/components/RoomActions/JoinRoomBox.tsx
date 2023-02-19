@@ -3,7 +3,15 @@ import { useNavigate } from 'react-router-dom'
 
 import { JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants'
 import { socket } from '../../socket'
+import { Member, Message } from '../../types/types'
 import styles from '../../pages/RoomActions.module.css'
+
+interface RoomJoinedParamsType {
+  members: Member[]
+  roomName: string
+  user: Member
+  messages: Message[]
+}
 
 const JoinRoomBox = () => {
   const navigate = useNavigate()
@@ -22,16 +30,24 @@ const JoinRoomBox = () => {
   }
 
   useEffect(() => {
-    socket.on(ROOM_NOT_FOUND, ({ message }) => {
+    const handleRoomNotFound = ({ message }: { message: string }) => {
       alert(message)
-    })
+    }
 
-    socket.on(ROOM_JOINED, ({ members, roomName, user, messages }) => {
+    const handleRoomJoined = ({ members, roomName, user, messages }: RoomJoinedParamsType) => {
       navigate(
         `/room/${roomName}`,
         { state: { members, roomName, userId: user.id, messages }, replace: true }
       )
-    })
+    }
+
+    socket.on(ROOM_NOT_FOUND, handleRoomNotFound)
+    socket.on(ROOM_JOINED, handleRoomJoined)
+
+    return () => {
+      socket.off(ROOM_NOT_FOUND, handleRoomNotFound)
+      socket.off(ROOM_JOINED, handleRoomJoined)
+    }
   }, [navigate])
 
   return (

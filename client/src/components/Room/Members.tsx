@@ -14,9 +14,15 @@ const Members = ({ members, userId }: MembersProps) => {
   const [chatMembers, setChatMembers] = useState(members || [])
 
   useEffect(() => {
-    socket.on(UPDATE_MEMBERS, ({ members }) => {
+    const updateMembers = ({ members }: { members: Member[] }) => {
       setChatMembers(members)
-    })
+    }
+
+    socket.on(UPDATE_MEMBERS, updateMembers)
+
+    return () => {
+      socket.off(UPDATE_MEMBERS, updateMembers)
+    }
   }, [])
 
   return (
