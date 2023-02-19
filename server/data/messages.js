@@ -1,8 +1,10 @@
+const { MESSAGE } = require('../constants/messageTypes')
+
 const messages = []
 
 const getRoomMessages = (roomName, userId) => {
   return messages[roomName]?.filter(message => {
-    if (message.type === 'message') return true // All messages with type 'message' are returned
+    if (message.type === MESSAGE) return true // All messages with type 'message' are returned
     return message.sender.id !== userId // Only 'notification' messages that does not match with userId are returned
   })
 }

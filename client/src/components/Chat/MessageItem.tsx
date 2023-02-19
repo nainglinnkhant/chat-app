@@ -1,4 +1,5 @@
 import { Message } from '../../types/types'
+import { MESSAGE } from '../../constants/messageTypes'
 import styles from '../../pages/Room.module.css'
 
 interface MessageItemProps {
@@ -10,7 +11,7 @@ const MessageItem = ({ message }: MessageItemProps) => {
 
   return (
     <li className={styles['message-item']}>
-      {type === 'message' ? (
+      {type === MESSAGE ? (
         <>
           <h3>
             <span>{sender?.name}</span>

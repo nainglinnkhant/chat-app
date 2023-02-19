@@ -5,6 +5,7 @@ const cors = require('cors')
 const { v4: uuidv4 } = require('uuid')
 
 const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS, SEND_MESSAGE, RECEIVE_MESSAGE } = require('./constants/eventNames')
+const { MESSAGE, NOTIFICATION } = require('./constants/messageTypes')
 const { addUser, getRoomMembers, removeUser, getUser } = require('./data/users')
 const { addMessage, getRoomMessages, deleteRoom } = require('./data/messages')
 const { formatDate } = require('./utils/date')
@@ -33,7 +34,7 @@ const joinRoom = (socket, roomName, userName) => {
   
   const message = {
     id: uuidv4(),
-    type: 'notification',
+    type: NOTIFICATION,
     sender: user,
     text: `${userName} has joined the room.`,
     createdAt: formatDate(Date.now()),
@@ -49,7 +50,7 @@ const leaveRoom = (socket, roomName) => {
   const user = getUser(socket.id)
   const message = {
     id: uuidv4(),
-    type: 'notification',
+    type: NOTIFICATION,
     sender: user,
     text: `${user?.name} has left the room.`,
     createdAt: formatDate(Date.now()),
@@ -96,7 +97,7 @@ io.on('connection', socket => {
     const sender = getUser(senderId)
     const messageObj = {
       id: uuidv4(),
-      type: 'message',
+      type: MESSAGE,
       sender,
       text: message,
       createdAt: formatDate(Date.now()),
