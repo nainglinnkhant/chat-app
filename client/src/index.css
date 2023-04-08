@@ -13,12 +13,23 @@
   --light-grey: #979595;
 }
 
-html, body {
+html,
+body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #36393e;
+  background: var(--medium-black);
   scroll-behavior: smooth;
 }
 
 button {
   cursor: pointer;
+}
+
+em-emoji-picker {
+  --rgb-accent: 114, 137, 218;
+  --rgb-background: 40, 43, 48;
+  --rgb-input: 54, 57, 62;
+
+  height: 50vh;
+  min-height: 300px;
+  max-height: 500px;
 }
