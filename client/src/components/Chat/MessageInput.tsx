@@ -19,6 +19,9 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
   const sendMessage = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!message.trim()) return
+
     socket.emit(SEND_MESSAGE, { roomName, senderId: userId, message })
     setMessage('')
     setIsPickerOpen(false)
