@@ -60,6 +60,7 @@ const joinRoom = (socket: Socket, roomName: string, userName: string) => {
 
 const leaveRoom = (socket: Socket, roomName: string) => {
   const user = getUser(socket.id)
+  if (!user) return
 
   const message = {
     id: uuidv4(),
@@ -116,6 +117,8 @@ io.on('connection', (socket: Socket) => {
 
   socket.on(SEND_MESSAGE, ({ roomName, senderId, data, type }: MessagePayload) => {
     const sender = getUser(senderId)
+
+    if (!sender) return
 
     const messageObj = {
       id: uuidv4(),
