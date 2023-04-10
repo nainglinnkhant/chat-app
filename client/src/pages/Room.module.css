@@ -91,7 +91,7 @@
   background: transparent;
   color: #fff;
   font-size: 16px;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
   width: 100%;
   height: 100%;
   padding: 15px;
@@ -141,7 +141,11 @@
   margin-top: 5px;
   font-size: 1rem;
   line-height: 1.5rem;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
+}
+
+.send-btn {
+  font-size: 14px;
 }
 
 .emoji-picker {
