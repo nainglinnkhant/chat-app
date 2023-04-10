@@ -7,7 +7,7 @@
   },
   "name": "chat-app-server",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "build/server.js",
   "devDependencies": {
     "@types/node": "^18.15.11",
     "nodemon": "^2.0.22",
@@ -15,8 +15,9 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "dev": "npx nodemon",
-    "start": "node server.js"
+    "dev": "nodemon",
+    "build": "rm -rf build && tsc",
+    "start": "npm run build && node build/server.js"
   },
   "author": "Naing Linn Khant",
   "license": "ISC",

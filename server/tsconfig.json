@@ -7,7 +7,7 @@
     "strict": true,
     "skipLibCheck": true,
     "noImplicitAny": true,
-    "outDir": "dist",
+    "outDir": "build",
     "rootDir": "src"
   }
 }
