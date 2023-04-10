@@ -15,7 +15,7 @@ const {
   SEND_MESSAGE,
   RECEIVE_MESSAGE,
 } = require('./constants/eventNames')
-const { MESSAGE, NOTIFICATION } = require('./constants/messageTypes')
+const { NOTIFICATION } = require('./constants/messageTypes')
 const { addUser, getRoomMembers, removeUser, getUser } = require('./data/users')
 const { addMessage, getRoomMessages, deleteRoom } = require('./data/messages')
 const { formatDate } = require('./utils/date')
@@ -46,7 +46,7 @@ const joinRoom = (socket, roomName, userName) => {
     id: uuidv4(),
     type: NOTIFICATION,
     sender: user,
-    text: `${userName} has joined the room.`,
+    data: `${userName} has joined the room.`,
     createdAt: formatDate(Date.now()),
   }
   addMessage(message, roomName)
@@ -62,7 +62,7 @@ const leaveRoom = (socket, roomName) => {
     id: uuidv4(),
     type: NOTIFICATION,
     sender: user,
-    text: `${user?.name} has left the room.`,
+    data: `${user?.name} has left the room.`,
     createdAt: formatDate(Date.now()),
   }
   addMessage(message, roomName)
@@ -105,13 +105,13 @@ io.on('connection', socket => {
     leaveRoom(socket, roomName)
   })
 
-  socket.on(SEND_MESSAGE, ({ roomName, senderId, message }) => {
+  socket.on(SEND_MESSAGE, ({ roomName, senderId, message, type }) => {
     const sender = getUser(senderId)
     const messageObj = {
       id: uuidv4(),
-      type: MESSAGE,
+      type,
       sender,
-      text: message,
+      data: message,
       createdAt: formatDate(Date.now()),
     }
 
