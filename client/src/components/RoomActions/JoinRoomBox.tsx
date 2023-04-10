@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { JOIN_ROOM, ROOM_JOINED, ROOM_NOT_FOUND } from '../../constants/eventNames'
 import { socket } from '../../socket'
-import { Member, Message } from '../../types/types'
+import type { Member, Message } from '../../types/types'
 import styles from '../../pages/RoomActions.module.css'
 
 interface RoomJoinedParamsType {
@@ -24,7 +24,9 @@ const JoinRoomBox = () => {
     e.preventDefault()
     setError(null)
 
-    if (!roomName.trim() || !userName.trim()) return setError('You need to fill in all fields.')
+    if (!roomName.trim() || !userName.trim()) {
+      return setError('You need to fill in all fields.')
+    }
 
     socket.emit(JOIN_ROOM, { roomName, userName })
   }
@@ -34,11 +36,16 @@ const JoinRoomBox = () => {
       alert(message)
     }
 
-    const handleRoomJoined = ({ members, roomName, user, messages }: RoomJoinedParamsType) => {
-      navigate(
-        `/room/${roomName}`,
-        { state: { members, roomName, userId: user.id, messages }, replace: true }
-      )
+    const handleRoomJoined = ({
+      members,
+      roomName,
+      user,
+      messages,
+    }: RoomJoinedParamsType) => {
+      navigate(`/room/${roomName}`, {
+        state: { members, roomName, userId: user.id, messages },
+        replace: true,
+      })
     }
 
     socket.on(ROOM_NOT_FOUND, handleRoomNotFound)

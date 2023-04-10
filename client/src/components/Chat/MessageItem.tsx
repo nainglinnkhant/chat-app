@@ -1,4 +1,4 @@
-import { Message } from '../../types/types'
+import type { Message } from '../../types/types'
 import { MESSAGE } from '../../constants/messageTypes'
 import styles from '../../pages/Room.module.css'
 

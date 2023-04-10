@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { UPDATE_MEMBERS } from '../../constants/eventNames'
 import { socket } from '../../socket'
-import { Member } from '../../types/types'
+import type { Member } from '../../types/types'
 import styles from '../../pages/Room.module.css'
 
 interface MembersProps {
@@ -30,7 +30,9 @@ const Members = ({ members, userId }: MembersProps) => {
       <h2>Members</h2>
 
       {chatMembers.map(({ id, name }) => (
-        <p className={userId === id ? styles['active-member'] : ''} key={id}>{name}</p>
+        <p className={userId === id ? styles['active-member'] : ''} key={id}>
+          {name}
+        </p>
       ))}
     </div>
   )

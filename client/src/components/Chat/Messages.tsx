@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { RECEIVE_MESSAGE } from '../../constants/eventNames'
 import { socket } from '../../socket'
 import MessageItem from './MessageItem'
-import { Message } from '../../types/types'
+import type { Message } from '../../types/types'
 import styles from '../../pages/Room.module.css'
 
 interface MessagesProps {

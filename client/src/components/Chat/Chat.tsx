@@ -1,6 +1,6 @@
 import MessageInput from './MessageInput'
 import Messages from './Messages'
-import { Message } from '../../types/types'
+import type { Message } from '../../types/types'
 
 interface ChatProps {
   roomName: string
@@ -12,7 +12,7 @@ const Chat = ({ roomName, userId, messages }: ChatProps) => {
   return (
     <>
       <Messages messages={messages} />
-      
+
       <MessageInput roomName={roomName} userId={userId} />
     </>
   )

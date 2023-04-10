@@ -1,5 +1,5 @@
 import { Server, Socket } from 'socket.io'
-import { MessagePayload } from './types/types'
+import type { MessagePayload } from './types/types'
 
 const express = require('express')
 const http = require('http')
