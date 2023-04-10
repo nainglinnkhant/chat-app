@@ -9,9 +9,12 @@
   "name": "chat-app-server",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  },
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "npx nodemon",
     "start": "node server.js"
   },
   "author": "Naing Linn Khant",

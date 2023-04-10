@@ -1,15 +1,15 @@
-const formatDateTimeDigits = (text) => {
+const formatDateTimeDigits = (text: number) => {
   const textString = `${text}`
   return textString.length === 1 ? `0${textString}` : `${textString}`
 }
 
-const formatMonth = (dateObj) => {
+const formatMonth = (dateObj: Date) => {
   const month = dateObj.getMonth() + 1
-  
+
   return formatDateTimeDigits(month)
 }
 
-const formatTime = (dateObj) => {
+const formatTime = (dateObj: Date) => {
   let hours = dateObj.getHours()
   const minutes = dateObj.getMinutes()
   const ampm = hours >= 12 ? 'PM' : 'AM'
@@ -22,7 +22,7 @@ const formatTime = (dateObj) => {
   return `${formatDateTimeDigits(hours)}:${formatDateTimeDigits(minutes)} ${ampm}`
 }
 
-const formatDate = (timeStamp) => {
+const formatDate = (timeStamp: number) => {
   const dateObj = new Date(timeStamp)
   const date = dateObj.getDate()
   const month = formatMonth(dateObj)

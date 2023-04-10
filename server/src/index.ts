@@ -1,6 +1,8 @@
+import { Server, Socket } from 'socket.io'
+import { MessagePayload } from './types/types'
+
 const express = require('express')
 const http = require('http')
-const { Server } = require('socket.io')
 const cors = require('cors')
 const { v4: uuidv4 } = require('uuid')
 
@@ -26,11 +28,11 @@ app.use(cors())
 
 const server = http.createServer(app)
 
-const io = new Server(server)
+const io: Server = new Server(server)
 
 const PORT = process.env.PORT || 3001
 
-const joinRoom = (socket, roomName, userName) => {
+const joinRoom = (socket: Socket, roomName: string, userName: string) => {
   socket.join(roomName)
   const user = {
     id: socket.id,
@@ -56,8 +58,9 @@ const joinRoom = (socket, roomName, userName) => {
   io.to(roomName).emit(UPDATE_MEMBERS, { members })
 }
 
-const leaveRoom = (socket, roomName) => {
+const leaveRoom = (socket: Socket, roomName: string) => {
   const user = getUser(socket.id)
+
   const message = {
     id: uuidv4(),
     type: NOTIFICATION,
@@ -77,41 +80,48 @@ const leaveRoom = (socket, roomName) => {
   if (members.length === 0) deleteRoom(roomName)
 }
 
-const isRoomCreated = roomName => {
+const isRoomCreated = (roomName: string) => {
   const rooms = [...io.sockets.adapter.rooms]
   return rooms?.some(room => room[0] === roomName)
 }
 
-io.on('connection', socket => {
-  socket.on(CREATE_ROOM, ({ roomName, userName }) => {
-    if (isRoomCreated(roomName)) {
-      socket.emit(ROOM_CREATE_FAIL, { message: 'This room is already created.' })
-    } else {
-      joinRoom(socket, roomName, userName)
+io.on('connection', (socket: Socket) => {
+  socket.on(
+    CREATE_ROOM,
+    ({ roomName, userName }: { roomName: string; userName: string }) => {
+      if (isRoomCreated(roomName)) {
+        socket.emit(ROOM_CREATE_FAIL, { message: 'This room is already created.' })
+      } else {
+        joinRoom(socket, roomName, userName)
+      }
     }
-  })
+  )
 
-  socket.on(JOIN_ROOM, ({ roomName, userName }) => {
-    if (isRoomCreated(roomName)) {
-      joinRoom(socket, roomName, userName)
-    } else {
-      socket.emit(ROOM_NOT_FOUND, {
-        message: 'The room you have entered in not created yet!',
-      })
+  socket.on(
+    JOIN_ROOM,
+    ({ roomName, userName }: { roomName: string; userName: string }) => {
+      if (isRoomCreated(roomName)) {
+        joinRoom(socket, roomName, userName)
+      } else {
+        socket.emit(ROOM_NOT_FOUND, {
+          message: 'The room you have entered in not created yet!',
+        })
+      }
     }
-  })
+  )
 
-  socket.on(LEAVE_ROOM, ({ roomName }) => {
+  socket.on(LEAVE_ROOM, ({ roomName }: { roomName: string }) => {
     leaveRoom(socket, roomName)
   })
 
-  socket.on(SEND_MESSAGE, ({ roomName, senderId, message, type }) => {
+  socket.on(SEND_MESSAGE, ({ roomName, senderId, data, type }: MessagePayload) => {
     const sender = getUser(senderId)
+
     const messageObj = {
       id: uuidv4(),
       type,
       sender,
-      data: message,
+      data,
       createdAt: formatDate(Date.now()),
     }
 
