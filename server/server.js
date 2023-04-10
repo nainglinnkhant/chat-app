@@ -4,7 +4,17 @@ const { Server } = require('socket.io')
 const cors = require('cors')
 const { v4: uuidv4 } = require('uuid')
 
-const { CREATE_ROOM, JOIN_ROOM, ROOM_NOT_FOUND, ROOM_JOINED, LEAVE_ROOM, ROOM_CREATE_FAIL, UPDATE_MEMBERS, SEND_MESSAGE, RECEIVE_MESSAGE } = require('./constants/eventNames')
+const {
+  CREATE_ROOM,
+  JOIN_ROOM,
+  ROOM_NOT_FOUND,
+  ROOM_JOINED,
+  LEAVE_ROOM,
+  ROOM_CREATE_FAIL,
+  UPDATE_MEMBERS,
+  SEND_MESSAGE,
+  RECEIVE_MESSAGE,
+} = require('./constants/eventNames')
 const { MESSAGE, NOTIFICATION } = require('./constants/messageTypes')
 const { addUser, getRoomMembers, removeUser, getUser } = require('./data/users')
 const { addMessage, getRoomMessages, deleteRoom } = require('./data/messages')
@@ -31,7 +41,7 @@ const joinRoom = (socket, roomName, userName) => {
 
   const members = getRoomMembers(roomName)
   const messages = getRoomMessages(roomName, socket.id) || []
-  
+
   const message = {
     id: uuidv4(),
     type: NOTIFICATION,
@@ -67,7 +77,7 @@ const leaveRoom = (socket, roomName) => {
   if (members.length === 0) deleteRoom(roomName)
 }
 
-const isRoomCreated = (roomName) => {
+const isRoomCreated = roomName => {
   const rooms = [...io.sockets.adapter.rooms]
   return rooms?.some(room => room[0] === roomName)
 }
@@ -85,7 +95,9 @@ io.on('connection', socket => {
     if (isRoomCreated(roomName)) {
       joinRoom(socket, roomName, userName)
     } else {
-      socket.emit(ROOM_NOT_FOUND, { message: 'The room you have entered in not created yet!' })
+      socket.emit(ROOM_NOT_FOUND, {
+        message: 'The room you have entered in not created yet!',
+      })
     }
   })
 
