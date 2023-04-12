@@ -7,9 +7,9 @@ import useFileUpload from 'react-use-file-upload'
 import { SEND_MESSAGE } from '../../constants/eventNames'
 import { IMAGE, MESSAGE } from '../../constants/messageTypes'
 import { socket } from '../../socket'
+import PreviewImages from './PreviewImages'
 import EmojiIcon from '../Icons/EmojiIcon'
 import ImageIcon from '../Icons/ImageIcon'
-import TrashIcon from '../Icons/TrashIcon'
 import type { CloudinaryImage } from '../../types/types'
 import styles from '../../pages/Room.module.css'
 
@@ -103,19 +103,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
         </div>
       )}
 
-      {images.length > 0 && (
-        <ul className={styles['image-preview']}>
-          {images.map((image, index) => (
-            <li key={image.url} className={styles['image-container']}>
-              <button type='button' onClick={() => removeFile(index)}>
-                <TrashIcon size={20} color='#f23f42' />
-              </button>
-
-              <img src={image.url} alt={image.name} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <PreviewImages images={images} removeFile={removeFile} />
 
       <button
         type='button'
