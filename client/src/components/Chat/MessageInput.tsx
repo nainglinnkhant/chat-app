@@ -28,11 +28,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
   const images = files.map(image => ({ ...image, url: URL.createObjectURL(image) }))
 
-  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    if (!message.trim() && files.length === 0) return
-
+  const uploadImages = async () => {
     const promises: Promise<AxiosResponse<CloudinaryImage>>[] = []
 
     files.forEach(file => {
@@ -50,7 +46,15 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
     })
 
     const responses = await Promise.all(promises)
-    const uploadedImages = [...responses.map(response => response.data)]
+    return [...responses.map(response => response.data)]
+  }
+
+  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!message.trim() && files.length === 0) return
+
+    const uploadedImages = await uploadImages()
 
     if (images.length) {
       socket.emit(SEND_MESSAGE, {
@@ -59,7 +63,9 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
         data: uploadedImages,
         type: IMAGE,
       })
-    } else {
+    }
+
+    if (message.length) {
       socket.emit(SEND_MESSAGE, {
         roomName,
         senderId: userId,
