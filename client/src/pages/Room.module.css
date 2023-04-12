@@ -162,3 +162,54 @@
   height: 100%;
   z-index: -10;
 }
+
+.visually-hidden {
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.image-preview {
+  position: absolute;
+  top: -191px;
+  left: 0;
+  right: 0;
+  background: var(--light-black);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 20px;
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 160px;
+  background: var(--medium-black);
+  border-radius: 5px;
+  position: relative;
+}
+
+.image-container img {
+  max-height: 130px;
+  max-width: 140px;
+}
+
+.image-container button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+.top-radius-0 {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0.5px solid #908d8d;
+}
