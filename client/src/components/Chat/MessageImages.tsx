@@ -12,7 +12,7 @@ const MessageImages = ({ message }: MessageImagesProps) => {
   if (type !== IMAGE) return null
 
   return (
-    <li className={styles['message-item']}>
+    <>
       <h3>
         <span>{sender?.name}</span>
         <span>{createdAt}</span>
@@ -25,7 +25,7 @@ const MessageImages = ({ message }: MessageImagesProps) => {
           </li>
         ))}
       </ul>
-    </li>
+    </>
   )
 }
 
