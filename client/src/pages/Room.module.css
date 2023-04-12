@@ -109,7 +109,7 @@
   border: 0;
 }
 
-.message-container ul {
+.message-container .message-list {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -121,6 +121,13 @@
   border-radius: 5px;
   padding: 6px 30px 6px 12px;
   margin-bottom: 1rem;
+}
+
+.message-images {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .message-item h3 span {

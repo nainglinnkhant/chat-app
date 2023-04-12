@@ -33,7 +33,7 @@ const Messages = ({ messages }: MessagesProps) => {
 
   return (
     <div className={styles['message-container']}>
-      <ul>
+      <ul className={styles['message-list']}>
         {messageList.map(message => (
           <MessageItem key={message.id} message={message} />
         ))}
