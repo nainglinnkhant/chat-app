@@ -110,12 +110,6 @@
   color: var(--light-grey);
 }
 
-.message-form button {
-  background: transparent;
-  color: #fff;
-  border: 0;
-}
-
 .message-container .message-list {
   display: flex;
   flex-direction: column;
@@ -160,6 +154,7 @@
 
 .send-btn {
   font-size: 14px;
+  color: #fff;
 }
 
 .emoji-picker {
@@ -222,7 +217,6 @@
   position: absolute;
   top: -8px;
   right: -8px;
-  background: transparent;
 }
 
 .top-radius-0 {
