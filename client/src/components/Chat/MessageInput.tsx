@@ -56,21 +56,21 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
     const uploadedImages = await uploadImages()
 
-    if (images.length) {
-      socket.emit(SEND_MESSAGE, {
-        roomName,
-        senderId: userId,
-        data: uploadedImages,
-        type: IMAGE,
-      })
-    }
-
     if (message.length) {
       socket.emit(SEND_MESSAGE, {
         roomName,
         senderId: userId,
         data: message,
         type: MESSAGE,
+      })
+    }
+
+    if (images.length) {
+      socket.emit(SEND_MESSAGE, {
+        roomName,
+        senderId: userId,
+        data: uploadedImages,
+        type: IMAGE,
       })
     }
 
