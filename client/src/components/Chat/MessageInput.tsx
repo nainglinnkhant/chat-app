@@ -7,6 +7,7 @@ import useFileUpload from 'react-use-file-upload'
 import { SEND_MESSAGE } from '../../constants/eventNames'
 import { IMAGE, TEXT } from '../../constants/messageTypes'
 import { socket } from '../../socket'
+import LoadingIndicator from '../UI/LoadingIndicator'
 import PreviewImages from './PreviewImages'
 import EmojiIcon from '../Icons/EmojiIcon'
 import ImageIcon from '../Icons/ImageIcon'
@@ -21,8 +22,10 @@ interface MessageInputProps {
 const MessageInput = ({ roomName, userId }: MessageInputProps) => {
   const [message, setMessage] = useState('')
   const [isPickerOpen, setIsPickerOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const textInputRef = useRef<HTMLInputElement | null>(null)
 
   const { files, setFiles, removeFile, clearAllFiles } = useFileUpload()
 
@@ -60,6 +63,8 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
     if (!message.trim() && files.length === 0) return
 
+    setIsSubmitting(true)
+
     const uploadedImages = await uploadImages()
 
     if (message.length) {
@@ -79,6 +84,8 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
         type: IMAGE,
       })
     }
+
+    setIsSubmitting(false)
   }
 
   return (
@@ -116,7 +123,13 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
           <EmojiIcon color='#979595' />
         </button>
 
-        <button type='button' onClick={() => fileInputRef.current?.click()}>
+        <button
+          type='button'
+          onClick={() => {
+            fileInputRef.current?.click()
+            textInputRef.current?.focus()
+          }}
+        >
           <ImageIcon color='#979595' />
         </button>
 
@@ -132,13 +145,16 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
         />
 
         <input
+          ref={textInputRef}
           value={message}
           onChange={e => setMessage(e.target.value)}
           type='text'
           placeholder='Message'
         />
 
-        <button className={styles['send-btn']}>Send</button>
+        <button disabled={isSubmitting} className={styles['send-btn']}>
+          {isSubmitting ? <LoadingIndicator /> : 'Send'}
+        </button>
       </form>
     </>
   )
