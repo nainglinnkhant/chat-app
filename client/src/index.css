@@ -11,6 +11,8 @@
   --light-blue: #7289da;
   --warning: #e5534b;
   --light-grey: #979595;
+  --toastify-color-dark: var(--dark-black) !important;
+  --toastify-color-error: var(--warning) !important;
 }
 
 html,

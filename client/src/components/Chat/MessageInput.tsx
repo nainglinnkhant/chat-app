@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from 'axios'
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import useFileUpload from 'react-use-file-upload'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { SEND_MESSAGE } from '../../constants/eventNames'
 import { IMAGE, TEXT } from '../../constants/messageTypes'
@@ -65,24 +67,28 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
     setIsSubmitting(true)
 
-    const uploadedImages = await uploadImages()
+    try {
+      const uploadedImages = await uploadImages()
 
-    if (message.length) {
-      socket.emit(SEND_MESSAGE, {
-        roomName,
-        senderId: userId,
-        data: message,
-        type: TEXT,
-      })
-    }
+      if (message.length) {
+        socket.emit(SEND_MESSAGE, {
+          roomName,
+          senderId: userId,
+          data: message,
+          type: TEXT,
+        })
+      }
 
-    if (files.length) {
-      socket.emit(SEND_MESSAGE, {
-        roomName,
-        senderId: userId,
-        data: uploadedImages,
-        type: IMAGE,
-      })
+      if (files.length) {
+        socket.emit(SEND_MESSAGE, {
+          roomName,
+          senderId: userId,
+          data: uploadedImages,
+          type: IMAGE,
+        })
+      }
+    } catch (err) {
+      toast('Failed to upload images!', { type: 'error' })
     }
 
     setIsSubmitting(false)
@@ -90,6 +96,8 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
   return (
     <>
+      <ToastContainer theme='dark' />
+
       <PreviewImages images={files} removeFile={removeFile} />
 
       <form
