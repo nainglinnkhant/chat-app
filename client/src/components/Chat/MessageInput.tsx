@@ -26,6 +26,12 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
   const { files, setFiles, removeFile, clearAllFiles } = useFileUpload()
 
+  const resetForm = () => {
+    clearAllFiles()
+    setMessage('')
+    setIsPickerOpen(false)
+  }
+
   const uploadImages = async () => {
     const promises: Promise<AxiosResponse<CloudinaryImage>>[] = []
 
@@ -43,7 +49,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
       )
     })
 
-    clearAllFiles()
+    resetForm()
 
     const responses = await Promise.all(promises)
     return [...responses.map(response => response.data)]
@@ -73,9 +79,6 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
         type: IMAGE,
       })
     }
-
-    setMessage('')
-    setIsPickerOpen(false)
   }
 
   return (
