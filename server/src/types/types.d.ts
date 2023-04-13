@@ -4,21 +4,20 @@ export interface User {
   roomName: string
 }
 
-export type Message =
+export type Message = (
   | {
-      id: string
       type: 'message' | 'notification'
-      sender: User
       data: string
-      createdAt: string
     }
   | {
-      id: string
       type: 'image'
-      sender: User
       data: CloudinaryImage[]
-      createdAt: string
     }
+) & {
+  id: string
+  sender: User
+  createdAt: string
+}
 
 export interface Messages {
   [key: string]: Message[]

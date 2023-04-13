@@ -3,21 +3,20 @@ export interface Member {
   name: string
 }
 
-export type Message =
+export type Message = (
   | {
-      id: string
       type: 'message' | 'notification'
-      sender: Member
       data: string
-      createdAt: string
     }
   | {
-      id: string
       type: 'image'
-      sender: Member
       data: CloudinaryImage[]
-      createdAt: string
     }
+) & {
+  id: string
+  sender: Member
+  createdAt: string
+}
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number
