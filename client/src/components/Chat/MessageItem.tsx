@@ -1,5 +1,5 @@
 import MessageImages from './MessageImages'
-import { MESSAGE, NOTIFICATION } from '../../constants/messageTypes'
+import { NOTIFICATION, TEXT } from '../../constants/messageTypes'
 import type { Message } from '../../types/types'
 import styles from '../../pages/Room.module.css'
 
@@ -14,7 +14,7 @@ const MessageItem = ({ message }: MessageItemProps) => {
     <li className={styles['message-item']}>
       <MessageImages message={message} />
 
-      {type === MESSAGE && (
+      {type === TEXT && (
         <>
           <h3>
             <span>{sender?.name}</span>

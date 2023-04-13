@@ -5,7 +5,7 @@ export interface Member {
 
 export type Message = (
   | {
-      type: 'message' | 'notification'
+      type: 'text' | 'notification'
       data: string
     }
   | {

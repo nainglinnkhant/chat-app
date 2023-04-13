@@ -5,7 +5,7 @@ import Picker from '@emoji-mart/react'
 import useFileUpload from 'react-use-file-upload'
 
 import { SEND_MESSAGE } from '../../constants/eventNames'
-import { IMAGE, MESSAGE } from '../../constants/messageTypes'
+import { IMAGE, TEXT } from '../../constants/messageTypes'
 import { socket } from '../../socket'
 import PreviewImages from './PreviewImages'
 import EmojiIcon from '../Icons/EmojiIcon'
@@ -61,7 +61,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
         roomName,
         senderId: userId,
         data: message,
-        type: MESSAGE,
+        type: TEXT,
       })
     }
 

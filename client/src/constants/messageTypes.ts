@@ -1,5 +1,5 @@
-const MESSAGE = 'message'
+const TEXT = 'text'
 const NOTIFICATION = 'notification'
 const IMAGE = 'image'
 
-export { MESSAGE, NOTIFICATION, IMAGE }
+export { TEXT, NOTIFICATION, IMAGE }
