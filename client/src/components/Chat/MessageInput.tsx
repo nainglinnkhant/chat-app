@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
@@ -30,6 +30,15 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
   const textInputRef = useRef<HTMLInputElement | null>(null)
 
   const { files, setFiles, removeFile, clearAllFiles } = useFileUpload()
+
+  const handleFileOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileLength = e.target.files?.length || 0
+    if (fileLength > 10) {
+      return toast('You can only upload 10 images at a time!', { type: 'error' })
+    }
+
+    setFiles(e as unknown as Event)
+  }
 
   const resetForm = () => {
     clearAllFiles()
@@ -96,7 +105,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
 
   return (
     <>
-      <ToastContainer theme='dark' />
+      <ToastContainer theme='dark' newestOnTop />
 
       <PreviewImages images={files} removeFile={removeFile} />
 
@@ -146,9 +155,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
           type='file'
           accept='.png, .jpg, .jpeg'
           multiple
-          onChange={e => {
-            setFiles(e as unknown as Event)
-          }}
+          onChange={handleFileOnChange}
           className={styles['visually-hidden']}
         />
 
