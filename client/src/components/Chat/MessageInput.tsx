@@ -43,6 +43,8 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
       )
     })
 
+    clearAllFiles()
+
     const responses = await Promise.all(promises)
     return [...responses.map(response => response.data)]
   }
@@ -72,7 +74,6 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
       })
     }
 
-    clearAllFiles()
     setMessage('')
     setIsPickerOpen(false)
   }
