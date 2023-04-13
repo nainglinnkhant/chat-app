@@ -10,12 +10,12 @@ interface PreviewImagesProps {
 
 const PreviewImages = ({ images, removeFile }: PreviewImagesProps) => {
   return (
-    <>
+    <div className={styles['image-preview']}>
       {images.length > 0 && (
-        <ul className={styles['image-preview']}>
+        <ul>
           {images.map((image, index) => (
             <li key={image.url} className={styles['image-container']}>
-              <button type='button' onClick={() => removeFile(index)}>
+              <button onClick={() => removeFile(index)}>
                 <TrashIcon size={20} color='#f23f42' />
               </button>
 
@@ -24,7 +24,7 @@ const PreviewImages = ({ images, removeFile }: PreviewImagesProps) => {
           ))}
         </ul>
       )}
-    </>
+    </div>
   )
 }
 

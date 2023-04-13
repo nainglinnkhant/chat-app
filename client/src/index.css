@@ -22,6 +22,8 @@ body {
 
 button {
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 em-emoji-picker {

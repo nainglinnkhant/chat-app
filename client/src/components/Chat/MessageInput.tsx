@@ -80,63 +80,65 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
   }
 
   return (
-    <form
-      className={`${styles['message-form']} ${
-        images.length > 0 ? styles['top-radius-0'] : ''
-      }`}
-      onSubmit={sendMessage}
-    >
-      {isPickerOpen && (
-        <div className={styles['emoji-picker']}>
-          <div
-            className={styles['picker-overlay']}
-            onClick={() => setIsPickerOpen(false)}
-          />
-
-          <Picker
-            data={data}
-            theme='dark'
-            onEmojiSelect={(data: { native: string }) =>
-              setMessage(prevMessage => `${prevMessage}${data.native}`)
-            }
-          />
-        </div>
-      )}
-
+    <>
       <PreviewImages images={images} removeFile={removeFile} />
 
-      <button
-        type='button'
-        onClick={() => setIsPickerOpen(prevState => !prevState)}
-        style={{ marginRight: 12 }}
+      <form
+        className={`${styles['message-form']} ${
+          images.length > 0 ? styles['top-radius-0'] : ''
+        }`}
+        onSubmit={sendMessage}
       >
-        <EmojiIcon color='#979595' />
-      </button>
+        {isPickerOpen && (
+          <div className={styles['emoji-picker']}>
+            <div
+              className={styles['picker-overlay']}
+              onClick={() => setIsPickerOpen(false)}
+            />
 
-      <button type='button' onClick={() => fileInputRef.current?.click()}>
-        <ImageIcon color='#979595' />
-      </button>
+            <Picker
+              data={data}
+              theme='dark'
+              onEmojiSelect={(data: { native: string }) =>
+                setMessage(prevMessage => `${prevMessage}${data.native}`)
+              }
+            />
+          </div>
+        )}
 
-      <input
-        ref={fileInputRef}
-        type='file'
-        accept='.png, .jpg, .jpeg'
-        multiple
-        onChange={e => {
-          setFiles(e as unknown as Event)
-        }}
-        className={styles['visually-hidden']}
-      />
+        <button
+          type='button'
+          onClick={() => setIsPickerOpen(prevState => !prevState)}
+          style={{ marginRight: 12 }}
+        >
+          <EmojiIcon color='#979595' />
+        </button>
 
-      <input
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-        type='text'
-        placeholder='Message'
-      />
+        <button type='button' onClick={() => fileInputRef.current?.click()}>
+          <ImageIcon color='#979595' />
+        </button>
 
-      <button className={styles['send-btn']}>Send</button>
-    </form>
+        <input
+          ref={fileInputRef}
+          type='file'
+          accept='.png, .jpg, .jpeg'
+          multiple
+          onChange={e => {
+            setFiles(e as unknown as Event)
+          }}
+          className={styles['visually-hidden']}
+        />
+
+        <input
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          type='text'
+          placeholder='Message'
+        />
+
+        <button className={styles['send-btn']}>Send</button>
+      </form>
+    </>
   )
 }
 
