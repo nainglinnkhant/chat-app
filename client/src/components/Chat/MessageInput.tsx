@@ -38,6 +38,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
     }
 
     setFiles(e as unknown as Event)
+    fileInputRef.current!.value = ''
   }
 
   const resetForm = () => {
