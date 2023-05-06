@@ -1,6 +1,8 @@
 ## Getting Started
 
-First, run the server:
+First, create a .env file and fill your environment keys as shown in `.env.example`.
+
+Run the server:
 
 ```bash
 cd server
