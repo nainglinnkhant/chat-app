@@ -67,7 +67,7 @@ const MessageInput = ({ roomName, userId }: MessageInputProps) => {
     resetForm()
 
     const responses = await Promise.all(promises)
-    return [...responses.map(response => response.data)]
+    return responses.map(response => response.data)
   }
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
