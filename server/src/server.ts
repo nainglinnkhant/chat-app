@@ -105,7 +105,7 @@ io.on('connection', (socket: Socket) => {
         joinRoom(socket, roomName, userName)
       } else {
         socket.emit(ROOM_NOT_FOUND, {
-          message: 'The room you have entered in not created yet!',
+          message: 'The room you entered has not been created yet!',
         })
       }
     }
