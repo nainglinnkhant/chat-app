@@ -13,7 +13,7 @@ import LoadingIndicator from '../UI/LoadingIndicator'
 import PreviewImages from './PreviewImages'
 import EmojiIcon from '../Icons/EmojiIcon'
 import ImageIcon from '../Icons/ImageIcon'
-import type { CloudinaryImage } from '../../types/types'
+import type { CloudinaryImage } from '../../types'
 import styles from '../../pages/Room.module.css'
 
 interface MessageInputProps {

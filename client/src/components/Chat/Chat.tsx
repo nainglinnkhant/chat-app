@@ -1,6 +1,6 @@
 import MessageInput from './MessageInput'
 import Messages from './Messages'
-import type { Message } from '../../types/types'
+import type { Message } from '../../types'
 import styles from '../../pages/Room.module.css'
 
 interface ChatProps {

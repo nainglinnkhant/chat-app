@@ -1,4 +1,4 @@
-import type { User } from '../types/types'
+import type { User } from '../types'
 
 let users: User[] = []
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { UPDATE_MEMBERS } from '../../constants/eventNames'
 import { socket } from '../../socket'
-import type { Member } from '../../types/types'
+import type { Member } from '../../types'
 import styles from '../../pages/Room.module.css'
 
 interface MembersProps {

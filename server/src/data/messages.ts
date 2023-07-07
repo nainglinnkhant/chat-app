@@ -1,4 +1,4 @@
-import type { Message, Messages } from '../types/types'
+import type { Message, Messages } from '../types'
 
 const { MESSAGE } = require('../constants/messageTypes')
 

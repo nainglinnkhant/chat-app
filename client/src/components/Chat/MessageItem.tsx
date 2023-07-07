@@ -1,6 +1,6 @@
 import MessageImages from './MessageImages'
 import { NOTIFICATION, TEXT } from '../../constants/messageTypes'
-import type { Message } from '../../types/types'
+import type { Message } from '../../types'
 import styles from '../../pages/Room.module.css'
 
 interface MessageItemProps {
