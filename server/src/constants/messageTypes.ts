@@ -1,4 +1,5 @@
 module.exports = {
-  MESSAGE: 'message',
+  TEXT: 'text',
   NOTIFICATION: 'notification',
+  IMAGE: 'image',
 }

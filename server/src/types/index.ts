@@ -6,7 +6,7 @@ export interface User {
 
 export type Message = (
   | {
-      type: 'message' | 'notification'
+      type: 'text' | 'notification'
       data: string
     }
   | {
@@ -28,7 +28,7 @@ export type MessagePayload =
       senderId: string
       roomName: string
       data: string
-      type: 'message' | 'notification'
+      type: 'text' | 'notification'
     }
   | {
       senderId: string
