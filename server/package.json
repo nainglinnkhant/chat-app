@@ -11,12 +11,13 @@
   "devDependencies": {
     "@types/node": "^18.15.11",
     "nodemon": "^2.0.22",
+    "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "scripts": {
     "dev": "nodemon",
-    "build": "rm -rf build && tsc",
+    "build": "rimraf build && tsc",
     "start": "npm run build && node build/server.js"
   },
   "author": "Naing Linn Khant",
