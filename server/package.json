@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "rimraf build && tsc",
-    "start": "npm run build && node build/server.js"
+    "start": "yarn build && node build/server.js"
   },
   "author": "Naing Linn Khant",
   "license": "ISC",
