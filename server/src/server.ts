@@ -1,10 +1,10 @@
+import express from 'express'
 import { Server, Socket } from 'socket.io'
-import type { MessagePayload } from './types'
+import http from 'http'
+import cors from 'cors'
+import { v4 as uuidv4 } from 'uuid'
 
-const express = require('express')
-const http = require('http')
-const cors = require('cors')
-const { v4: uuidv4 } = require('uuid')
+import type { MessagePayload } from './types'
 
 const {
   CREATE_ROOM,
