@@ -23,19 +23,19 @@ export interface Messages {
   [key: string]: Message[]
 }
 
-export type MessagePayload =
+export type MessagePayload = (
   | {
-      senderId: string
-      roomName: string
-      data: string
       type: 'text' | 'notification'
+      data: string
     }
   | {
-      senderId: string
-      roomName: string
-      data: string[]
       type: 'image'
+      data: CloudinaryImage[]
     }
+) & {
+  senderId: string
+  roomName: string
+}
 
 export interface CloudinaryImage {
   access_mode: string

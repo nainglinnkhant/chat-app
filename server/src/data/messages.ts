@@ -23,8 +23,4 @@ const addMessage = (message: Message, roomName: string) => {
 
 const deleteRoom = (roomName: string) => delete messages[roomName]
 
-module.exports = {
-  getRoomMessages,
-  addMessage,
-  deleteRoom,
-}
+export { getRoomMessages, addMessage, deleteRoom }

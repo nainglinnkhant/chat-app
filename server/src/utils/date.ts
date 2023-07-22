@@ -22,7 +22,7 @@ const formatTime = (dateObj: Date) => {
   return `${formatDateTimeDigits(hours)}:${formatDateTimeDigits(minutes)} ${ampm}`
 }
 
-const formatDate = (timeStamp: number) => {
+export const formatDate = (timeStamp: number) => {
   const dateObj = new Date(timeStamp)
   const date = dateObj.getDate()
   const month = formatMonth(dateObj)
@@ -30,8 +30,4 @@ const formatDate = (timeStamp: number) => {
   const time = formatTime(dateObj)
 
   return `${date}/${month}/${year} ${time}`
-}
-
-module.exports = {
-  formatDate,
 }

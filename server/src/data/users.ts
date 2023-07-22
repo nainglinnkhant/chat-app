@@ -13,9 +13,4 @@ const removeUser = (userId: string) => {
   users = users.filter(user => user.id !== userId)
 }
 
-module.exports = {
-  getUser,
-  getRoomMembers,
-  addUser,
-  removeUser,
-}
+export { getUser, getRoomMembers, addUser, removeUser }

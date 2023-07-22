@@ -4,23 +4,11 @@ import http from 'http'
 import cors from 'cors'
 import { v4 as uuidv4 } from 'uuid'
 
-import type { MessagePayload } from './types'
-
-const {
-  CREATE_ROOM,
-  JOIN_ROOM,
-  ROOM_NOT_FOUND,
-  ROOM_JOINED,
-  LEAVE_ROOM,
-  ROOM_CREATE_FAIL,
-  UPDATE_MEMBERS,
-  SEND_MESSAGE,
-  RECEIVE_MESSAGE,
-} = require('./constants/eventNames')
-const { NOTIFICATION } = require('./constants/messageTypes')
-const { addUser, getRoomMembers, removeUser, getUser } = require('./data/users')
-const { addMessage, getRoomMessages, deleteRoom } = require('./data/messages')
-const { formatDate } = require('./utils/date')
+import type { Message, MessagePayload } from './types'
+import eventNames from './constants/eventNames'
+import { formatDate } from './utils/date'
+import { addUser, getRoomMembers, getUser, removeUser } from './data/users'
+import { addMessage, deleteRoom, getRoomMessages } from './data/messages'
 
 const app = express()
 
@@ -31,6 +19,18 @@ const server = http.createServer(app)
 const io: Server = new Server(server)
 
 const PORT = process.env.PORT || 3001
+
+const {
+  CREATE_ROOM,
+  JOIN_ROOM,
+  LEAVE_ROOM,
+  RECEIVE_MESSAGE,
+  ROOM_CREATE_FAIL,
+  ROOM_JOINED,
+  ROOM_NOT_FOUND,
+  SEND_MESSAGE,
+  UPDATE_MEMBERS,
+} = eventNames
 
 const joinRoom = (socket: Socket, roomName: string, userName: string) => {
   socket.join(roomName)
@@ -44,9 +44,9 @@ const joinRoom = (socket: Socket, roomName: string, userName: string) => {
   const members = getRoomMembers(roomName)
   const messages = getRoomMessages(roomName, socket.id) || []
 
-  const message = {
+  const message: Message = {
     id: uuidv4(),
-    type: NOTIFICATION,
+    type: 'notification',
     sender: user,
     data: `${userName} has joined the room.`,
     createdAt: formatDate(Date.now()),
@@ -62,9 +62,9 @@ const leaveRoom = (socket: Socket, roomName: string) => {
   const user = getUser(socket.id)
   if (!user) return
 
-  const message = {
+  const message: Message = {
     id: uuidv4(),
-    type: NOTIFICATION,
+    type: 'notification',
     sender: user,
     data: `${user?.name} has left the room.`,
     createdAt: formatDate(Date.now()),
@@ -126,7 +126,7 @@ io.on('connection', (socket: Socket) => {
       sender,
       data,
       createdAt: formatDate(Date.now()),
-    }
+    } as Message
 
     addMessage(messageObj, roomName)
     io.to(roomName).emit(RECEIVE_MESSAGE, messageObj)
