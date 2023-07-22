@@ -1,4 +1,4 @@
-import type { Message, Messages } from '../types'
+import type { Message, Messages } from '@/types'
 
 const messages: Messages = {}
 

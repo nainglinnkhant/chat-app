@@ -2,6 +2,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "module-alias": "^2.2.3",
     "socket.io": "^4.6.0",
     "uuid": "^9.0.0"
   },
@@ -24,5 +25,11 @@
   },
   "author": "Naing Linn Khant",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "_moduleAliases": {
+    "@/constants": "./build/constants",
+    "@/data": "./build/data",
+    "@/types": "./build/types",
+    "@/utils": "./build/utils"
+  }
 }

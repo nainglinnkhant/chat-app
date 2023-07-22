@@ -1,14 +1,16 @@
+import 'module-alias/register'
+
 import express from 'express'
 import { Server, Socket } from 'socket.io'
 import http from 'http'
 import cors from 'cors'
 import { v4 as uuidv4 } from 'uuid'
 
-import type { Message, MessagePayload } from './types'
-import eventNames from './constants/eventNames'
-import { formatDate } from './utils/date'
-import { addUser, getRoomMembers, getUser, removeUser } from './data/users'
-import { addMessage, deleteRoom, getRoomMessages } from './data/messages'
+import type { Message, MessagePayload } from '@/types'
+import eventNames from '@/constants/eventNames'
+import { formatDate } from '@/utils/date'
+import { addUser, getRoomMembers, getUser, removeUser } from '@/data/users'
+import { addMessage, deleteRoom, getRoomMessages } from '@/data/messages'
 
 const app = express()
 
